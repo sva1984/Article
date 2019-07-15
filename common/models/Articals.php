@@ -103,7 +103,9 @@ class Articals extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            ['class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'time_create',
+                'updatedAtAttribute' => 'time_update'],
             [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',
