@@ -28,7 +28,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //            'id',
             'title',
-            'text:ntext',
+[
+                'attribute' => 'Text',
+                'value' => function ($data) {
+                    $minText = $data->text;
+                    if (strlen($data->text) > 60) {
+                        $minText = substr($data->text, 0, 20);
+                    }
+                    return $minText;}
+],
+//            'text:ntext',
 //            'tagId',
 //            'slug',
             'time_create:datetime',
