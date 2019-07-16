@@ -16,6 +16,6 @@ use yii\widgets\DetailView;
 <div class="articals-view">
 
 </div>
-<?= $this->render('_form', [
+<?= $this->render('_formparrent', [
     'model' => $filialComment,
 ]) ?>

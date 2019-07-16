@@ -76,17 +76,25 @@ class ArticalsController extends Controller
      * @return string
      */
 
-    public function actionFilialComment()
+    public function actionFilialComment($id)
     {
     $filialComment = new Comment();
+
     if ($filialComment->load(Yii::$app->request->post())) {
-    $filialComment->parrent_comment_id = $filialComment->id;
-    $filialComment->save();
+
+        $filialComment->articals_id = 1;
+          $filialComment->parrent_comment_id = $id;
+
+
+        if (!$filialComment->save()) {
+            die(print_r($filialComment->errors));
         }
+    }
         return $this->render('filial', [
            'filialComment' => $filialComment
         ]);
     }
+
 
     /**
      * Finds the Articals model based on its primary key value.

@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin();
 //    echo $form->field($model, 'id')->hiddenInput(['value' => $model->id])->label(false);
-//    echo $form->field($model, 'parent_id')->hiddenInput(['value' => $model->parent_id])->label(false);
+    echo $form->field($model, 'parrent_comment_id')->hiddenInput(['value' => $model->parrent_comment_id])->label(false);
 //    echo $form->field($model, 'article_id')->hiddenInput(['value' => $model->article_id])->label(false);
 //    echo $form->field($model, 'created_at')->hiddenInput(['value' => $model->created_at])->label(false);
 //    echo $form->field($model, 'created_by')->hiddenInput(['value' => $model->created_by])->label(false);

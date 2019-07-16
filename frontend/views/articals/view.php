@@ -43,9 +43,15 @@ $this->params['breadcrumbs'][] = $this->title;
     'model' => $commentModel,
 ]) ?>
 <?php
+//var_dump($model->comments);die;
 foreach($model->comments as $item)
 {
+
     echo $this->render('_comment', ['comment' => $item]);
+    if($item->parrentComment){
+        echo $this->render('_comment', ['comment' => $item->parrentComment]);
+    }
+
 }
 ?>
 
