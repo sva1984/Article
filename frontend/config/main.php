@@ -41,7 +41,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-            'articles/<slug:[\w\-]+>' => 'articles/view'
+            'articles/<slug:[\w\-]+>' => 'articles/view',
+            '<slug:[\w\-]+>' => 'articles/view',
+//                'articals/FilialComment'=>'articalscontroller/filial-comment'
             ],
         ],
 

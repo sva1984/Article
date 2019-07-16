@@ -7,6 +7,8 @@ use yii\helpers\Html;
 <li style="margin-left:40px">
     <b><?= Html::encode($comment->createdBy->username); ?></b>
     <i>| <?= Html::encode($comment->getTimeCreate()); ?></i>
+    <?= Html::a('Add comment', ['articals/filial-comment'], ['class'=>'btn btn-primary']) ?>
+
     <br>
     <p class="commentText">
         <?= Html::encode($comment->comment); ?>

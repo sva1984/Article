@@ -72,6 +72,21 @@ class ArticalsController extends Controller
         ]);
     }
 
+    /**
+     * @return string
+     */
+
+    public function actionFilialComment()
+    {
+    $filialComment = new Comment();
+    if ($filialComment->load(Yii::$app->request->post())) {
+    $filialComment->parrent_comment_id = $filialComment->id;
+    $filialComment->save();
+        }
+        return $this->render('filial', [
+           'filialComment' => $filialComment
+        ]);
+    }
 
     /**
      * Finds the Articals model based on its primary key value.
@@ -83,8 +98,8 @@ class ArticalsController extends Controller
     protected function findModel($slug)
     {
         if (($model = Articals::findOne(['slug' => $slug])) !== null) {
-        return $model;
-    }
+            return $model;
+        }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
