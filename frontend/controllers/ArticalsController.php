@@ -78,20 +78,22 @@ class ArticalsController extends Controller
 
     public function actionFilialComment($id)
     {
-    $filialComment = new Comment();
+        $filialComment = new Comment();
 
-    if ($filialComment->load(Yii::$app->request->post())) {
+        if ($filialComment->load(Yii::$app->request->post())) {
 
-        $filialComment->articals_id = 1;
-          $filialComment->parrent_comment_id = $id;
+              $filialComment->articals_id = 1;
+            $filialComment->parrent_comment_id = $id;
+//            die(print_r($filialComment->errors));
+            if (!$filialComment->save()) {
+                die(print_r($filialComment->errors));
+            }
 
-
-        if (!$filialComment->save()) {
-            die(print_r($filialComment->errors));
         }
-    }
-        return $this->render('filial', [
-           'filialComment' => $filialComment
+        return $this->render('_formparrent', [
+            'filialComment' => $filialComment,
+            'articalID'=>$id,
+
         ]);
     }
 

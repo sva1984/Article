@@ -40,7 +40,7 @@ class Comment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['comment', 'articals_id'], 'required'],
+            [['comment',], 'required'],
             [['comment'], 'string'],
             [['articals_id', 'created_by', 'updated_by', 'time_create', 'time_update', 'parrent_comment_id'], 'integer'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],

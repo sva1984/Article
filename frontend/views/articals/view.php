@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ]) ?>
 <?php
 //var_dump($model->comments);die;
+//var_dump($commentModel->comments);die;
 foreach($model->comments as $item)
 {
 
