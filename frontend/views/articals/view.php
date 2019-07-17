@@ -39,18 +39,19 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
-<?= $this->render('_form', [
+<?=
+$this->render('_form', [
     'model' => $commentModel,
 ]) ?>
 <?php
 //var_dump($model->comments);die;
-//var_dump($commentModel->comments);die;
+//var_dump($commentModel);die;
 foreach($model->comments as $item)
 {
 
-    echo $this->render('_comment', ['comment' => $item]);
+    echo $this->render('_comment', ['comment' => $item, 'article' => $model]);
     if($item->parrentComment){
-        echo $this->render('_comment', ['comment' => $item->parrentComment]);
+        echo $this->render('_comment', ['comment' => $item->parrentComment, 'article' => $model]);
     }
 
 }

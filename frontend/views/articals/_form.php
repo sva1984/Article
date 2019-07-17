@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 //    echo $form->field($model, 'created_by')->hiddenInput(['value' => $model->created_by])->label(false);
     ?>
 
-    <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'comment')->textarea(['rows' => 3]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

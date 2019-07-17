@@ -72,17 +72,19 @@ class ArticalsController extends Controller
         ]);
     }
 
-    /**
-     * @return string
-     */
 
-    public function actionFilialComment($id)
+    /**
+     * @param $id
+     * @param $slug
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionFilialComment($id, $slug)
     {
         $filialComment = new Comment();
-
+        $articleModel = $this->findModel($slug);
         if ($filialComment->load(Yii::$app->request->post())) {
-
-              $filialComment->articals_id = 1;
+              $filialComment->articals_id = $articleModel->id;
             $filialComment->parrent_comment_id = $id;
 //            die(print_r($filialComment->errors));
             if (!$filialComment->save()) {
@@ -92,7 +94,8 @@ class ArticalsController extends Controller
         }
         return $this->render('_formparrent', [
             'filialComment' => $filialComment,
-            'articalID'=>$id,
+            'parentCommentId' => $id,
+            'model' => $articleModel,
 
         ]);
     }
