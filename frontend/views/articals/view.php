@@ -39,20 +39,30 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
-<?= $this->render('_form', [
+<?=
+$this->render('_form', [
     'model' => $commentModel,
 ]) ?>
-<?php
-//var_dump($model->comments);die;
-foreach($model->comments as $item)
-{
-
-    echo $this->render('_comment', ['comment' => $item]);
-    if($item->parrentComment){
-        echo $this->render('_comment', ['comment' => $item->parrentComment]);
-    }
-
-}
-?>
 
 
+<?php foreach ($model->comments as $item)
+{ ?>
+    <li style="margin-left:100px">
+        <b><?= Html::encode($item->createdBy->username); ?></b>
+        <i>| <?= Html::encode($item->getTimeCreate()); ?></i>
+        <?= Html::a('Add comment', ['articals/filial-comment?id='. $item->id . '&slug=' . $model->slug ], ['class'=>'btn btn-primary']) ?>
+        <br>
+        <p class="commentText">
+            <?= Html::encode($item->comment); ?>
+        </p>
+        <br>
+        <hr>
+    </li>
+<?php } ?>
+
+
+<!--    if($item->articals_id & $item->parrentComment==null)-->
+<!--    echo $this->render('_comment', ['comment' => $item, 'article' => $model]);-->
+<!--//    if($item->parrentComment !== NULL){-->
+<!--//        echo $this->render('_comment', ['comment' => $item->parrentComment, 'article' => $model]);-->
+<!--//    }-->
