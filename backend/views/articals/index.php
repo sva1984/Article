@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($data) {
                     $minText = $data->text;
                     if (strlen($data->text) > 60) {
-                        $minText = substr($data->text, 0, 20);
+                        $minText = substr($data->text, 0, 100);
                     }
                     return $minText;}
 ],

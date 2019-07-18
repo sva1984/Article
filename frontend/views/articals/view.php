@@ -44,13 +44,15 @@ $this->render('_form', [
     'model' => $commentModel,
 ]) ?>
 
-
-<?php foreach ($model->comments as $item)
-{ ?>
-    <li style="margin-left:100px">
+<?php
+$shif = 40;
+foreach ($model->comments as $item) { ?>
+    <li style="margin-left: <?php if ($item->parrent_comment_id)
+        echo '100';
+    else echo '40';?>px">
         <b><?= Html::encode($item->createdBy->username); ?></b>
         <i>| <?= Html::encode($item->getTimeCreate()); ?></i>
-        <?= Html::a('Add comment', ['articals/filial-comment?id='. $item->id . '&slug=' . $model->slug ], ['class'=>'btn btn-primary']) ?>
+        <?= Html::a('Add comment', ['articals/filial-comment?id=' . $item->id . '&slug=' . $model->slug], ['class' => 'btn btn-primary']) ?>
         <br>
         <p class="commentText">
             <?= Html::encode($item->comment); ?>
@@ -61,8 +63,20 @@ $this->render('_form', [
 <?php } ?>
 
 
-<!--    if($item->articals_id & $item->parrentComment==null)-->
-<!--    echo $this->render('_comment', ['comment' => $item, 'article' => $model]);-->
-<!--//    if($item->parrentComment !== NULL){-->
-<!--//        echo $this->render('_comment', ['comment' => $item->parrentComment, 'article' => $model]);-->
-<!--//    }-->
+
+
+<?php
+////var_dump($model->comments);die;
+////var_dump($commentModel);die;
+//foreach($model->comments as $item)
+//{
+//
+//    echo $this->render('_comment', ['comment' => $item, 'article' => $model]);
+//    if($item->parrentComment){
+//        echo $this->render('_comment', ['comment' => $item->parrentComment, 'article' => $model]);
+//    }
+//
+//}
+//?>
+
+
