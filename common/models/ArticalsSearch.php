@@ -17,7 +17,7 @@ class ArticalsSearch extends Articals
     public function rules()
     {
         return [
-            [['id', 'tagId', 'time_create', 'time_update'], 'integer'],
+            [['id', 'tagId', 'time_create', 'time_update', 'created_by', 'updated_by', 'active'], 'integer'],
             [['title', 'text', 'slug'], 'safe'],
         ];
     }
@@ -40,7 +40,7 @@ class ArticalsSearch extends Articals
      */
     public function search($params)
     {
-        $query = Articals::find();
+        $query = Articals::find()->where(['active' => true]);
 
         // add conditions that should always apply here
 
@@ -62,6 +62,9 @@ class ArticalsSearch extends Articals
             'tagId' => $this->tagId,
             'time_create' => $this->time_create,
             'time_update' => $this->time_update,
+            'created_by' => $this->created_by,
+            'updated_by' => $this->updated_by,
+            'active' => $this->active,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

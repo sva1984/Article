@@ -43,7 +43,7 @@ class Articals extends \yii\db\ActiveRecord
         return [
             [['title', 'text', 'tagId'], 'required'],
             [['text'], 'string'],
-            [['tagId', 'time_create', 'time_update', 'created_by', 'updated_by'], 'integer'],
+            [['tagId', 'time_create', 'time_update', 'created_by', 'updated_by', 'active'], 'integer'],
             [['title', 'slug'], 'string', 'max' => 64],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
@@ -65,6 +65,7 @@ class Articals extends \yii\db\ActiveRecord
             'slug' => 'Slug',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
+            'active' => 'Active',
         ];
     }
 

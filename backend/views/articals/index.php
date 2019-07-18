@@ -28,33 +28,43 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //            'id',
             'title',
-[
+            [
                 'attribute' => 'Text',
                 'value' => function ($data) {
                     $minText = $data->text;
                     if (strlen($data->text) > 60) {
                         $minText = substr($data->text, 0, 100);
                     }
-                    return $minText;}
-],
+                    return $minText;
+                }
+            ],
 //            'text:ntext',
 //            'tagId',
 //            'slug',
             'time_create:datetime',
 //            'time_update:datetime',
             ['label' => 'created_by',
-                'value' => function(\common\models\Articals $item){
-        return $item->createdBy->username; }],
+                'value' => function (\common\models\Articals $item) {
+                    return $item->createdBy->username;
+                }],
             ['label' => 'updated_by',
-                'value' => function(\common\models\Articals $item){
-                    return $item->updatedBy->username; }],
+                'value' => function (\common\models\Articals $item) {
+                    return $item->updatedBy->username;
+                }],
+                [
+                'attribute' => 'active',
+               'filter' => ["1"=>"YES", "0"=>"NO"],
+                'format' => 'boolean',
+//                'value' => function($data){return Html::checkbox('Active')}
+                ],
 //            'created_by',
 //            'updated_by',
             ['class' => 'yii\grid\ActionColumn'],
         ],
+
     ]);
-//    print_r(User::findone)
+    //    print_r(User::findone)
     ?>
-    <?php echo "Enter count: ".Yii::$app->request->cookies['enter']; ?>
+    <?php echo "Enter count: " . Yii::$app->request->cookies['enter']; ?>
 
 </div>

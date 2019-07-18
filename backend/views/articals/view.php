@@ -40,6 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->createdBy->username],
             ['label' => 'updated_by',
                 'value' => $model->createdBy->username],
+            'active',
+
         ],
     ]) ?>
 
