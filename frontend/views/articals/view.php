@@ -11,6 +11,8 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Articals', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+//echo '<pre>';
+//die(print_r($model));
 ?>
 <div class="articals-view">
 
