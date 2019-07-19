@@ -45,7 +45,7 @@ $this->render('_form', [
 ]) ?>
 
 <?php
-$shif = 40;
+// TODO: Переделать дерево комментов
 foreach ($model->comments as $item) { ?>
     <li style="margin-left: <?php if ($item->parrent_comment_id)
         echo '100';

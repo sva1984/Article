@@ -84,12 +84,16 @@ class ArticalsController extends Controller
         $filialComment = new Comment();
         $articleModel = $this->findModel($slug);
         if ($filialComment->load(Yii::$app->request->post())) {
-              $filialComment->articals_id = $articleModel->id;
+            $filialComment->articals_id = $articleModel->id;
             $filialComment->parrent_comment_id = $id;
-//            die(print_r($filialComment->errors));
+            Yii::$app->session->setFlash('success', 'comment added');
             if (!$filialComment->save()) {
                 die(print_r($filialComment->errors));
             }
+            return $this->render('view', [
+                'model' => $articleModel,
+                'commentModel' => $filialComment
+            ]);
 
         }
         return $this->render('_formparrent', [

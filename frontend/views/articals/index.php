@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use \common\models\Articals;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ArticalsSearch */
@@ -9,6 +11,8 @@ use yii\grid\GridView;
 
 $this->title = 'Articals';
 $this->params['breadcrumbs'][] = $this->title;
+$query = Articals::find()->where(['active' => true]);
+$provider = new \yii\data\ActiveDataProvider(['query' => $query])
 ?>
 <div class="articals-index">
 
@@ -18,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $provider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],

@@ -40,7 +40,7 @@ class ArticalsSearch extends Articals
      */
     public function search($params)
     {
-        $query = Articals::find()->where(['active' => true]);
+        $query = Articals::find()/*->where(['active' => true])*/; //отбор только актив статей front/backend
 
         // add conditions that should always apply here
 
