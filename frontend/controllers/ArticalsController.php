@@ -63,9 +63,11 @@ class ArticalsController extends Controller
             if (!$commentModel->save()) {
                 die(print_r($commentModel->errors));
             }
+//            Yii::$app->request->
+
             Yii::$app->session->setFlash('success', 'comment added');
         }
-
+        $commentModel = new Comment();
         return $this->render('view', [
             'model' => $articleModel,
             'commentModel' => $commentModel
@@ -90,12 +92,14 @@ class ArticalsController extends Controller
             if (!$filialComment->save()) {
                 die(print_r($filialComment->errors));
             }
+
             return $this->render('view', [
                 'model' => $articleModel,
-                'commentModel' => $filialComment
+                'commentModel' =>  new Comment()
             ]);
 
         }
+
         return $this->render('_formparrent', [
             'filialComment' => $filialComment,
             'parentCommentId' => $id,
