@@ -8,6 +8,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Articals */
 /* @var $commentModel common\models\Comment */
+/* @var $userModel common\models\User */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Articals', 'url' => ['index']];
@@ -24,7 +25,7 @@ function printComment($item, $model, $n)
     //        echo '100';
     //    else echo '40';
     ?>px">
-
+        <img src="<?= Html::encode($item->createdBy->img_url)?>" width="30" height="30">
         <b><?= Html::encode($item->createdBy->username); ?></b>
 
         <i>| <?= Html::encode($item->getTimeCreate()); ?></i>
@@ -102,10 +103,9 @@ function tree($model, $parrentCommentId, $level) //рекурсивная фун
             $level += 1;
             printComment($childcomment, $model, $level);
             $parrentCommentId = $childcomment->id;
-            if ($childcomment->comments)
-            {
-                tree($model, $parrentCommentId, $level);
-            }
+            //if ($level < 20/*$childcomment->comments*/) {
+            tree($model, $parrentCommentId, $level);
+           // }
             return $childcomment;
         }
     }
@@ -114,6 +114,7 @@ function tree($model, $parrentCommentId, $level) //рекурсивная фун
 foreach ($model->comments as $comment) { ?>
     <?php if ($comment->parrent_comment_id == null) //определяю родительский комментарий
     {
+
         $level = 1;
         printComment($comment, $model, $level); //печатаю родительский коммент
         $parrentCommentId = $comment->id;

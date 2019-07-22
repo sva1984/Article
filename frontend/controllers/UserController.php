@@ -65,7 +65,7 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
-        $model->img_url = 'https://previews.dropbox.com/p/thumb/AAfZWyl2DciUENXGcWKc4jcgpu-1UE61P8m-y9p9wdlPgLeDyQd3bE9VDBV3occJ3HDh5Ec-YzUqqqkGMdUpyGj5lMhRKB5JyXGMzgfSIzn2xLSSvl5-y9WHYMHBvvxxiFFBqITyjUVRPs1iiTWAf8wpgBMf85t7Fj9-iKyn2uQBFwdqkRMUYc8X0hdyHjTmbWOnw29WSraOZHyrLIB_6khYwk-Q6CXv1gp_cAoXGewIdtvic7Sz3RzNU14jQ59Oc4Vl5w4cS16wJe-uEAvAipxRj93QeZeixU2NX9ZnCU2NFBeathEnJluVdcswmETSTJ_orBi-84SMzqtvhm7VhBfT/p.png';
+        $model->img_url = 'https://pbs.twimg.com/profile_images/1114208426597453826/Tqjc5L4x_400x400.png';
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

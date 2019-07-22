@@ -2,12 +2,14 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
 use Yii;
 use common\models\Comment;
 use common\models\CommentSearch;
 use common\models\Articals;
 use common\models\ArticalsSearch;
 use yii\base\Model;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -58,6 +60,7 @@ class ArticalsController extends Controller
 
         $articleModel = $this->findModel($slug);
         $commentModel = new Comment();
+        $userModel = new User();
         if ($commentModel->load(Yii::$app->request->post())) {
             $commentModel->articals_id = $articleModel->id;
             if (!$commentModel->save()) {
@@ -70,7 +73,8 @@ class ArticalsController extends Controller
         $commentModel = new Comment();
         return $this->render('view', [
             'model' => $articleModel,
-            'commentModel' => $commentModel
+            'commentModel' => $commentModel,
+            'userModel' => $userModel
         ]);
     }
 
@@ -93,10 +97,7 @@ class ArticalsController extends Controller
                 die(print_r($filialComment->errors));
             }
 
-            return $this->render('view', [
-                'model' => $articleModel,
-                'commentModel' =>  new Comment()
-            ]);
+            return $this->redirect(Url::to(['articals/view', 'slug' => $slug]));
 
         }
 

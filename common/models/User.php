@@ -50,8 +50,8 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'time_create',
-                'updatedAtAttribute' => 'time_update'],
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at'],
         ];
     }
 
@@ -64,7 +64,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
 
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
+            [['username', 'auth_key', 'password_hash', 'email', /*'created_at', 'updated_at'*/], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'img_url'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
