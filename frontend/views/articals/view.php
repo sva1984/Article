@@ -18,7 +18,8 @@ YiiAsset::register($this);
 //die(print_r($model));
 
 function printComment($item, $model, $n)
-{ ?>
+{
+//    print_r($item)?>
 
     <li style="margin-left: <?php $margin = 40 * $n;
     echo "$margin";
@@ -36,6 +37,7 @@ function printComment($item, $model, $n)
         <p class="commentText">
 
             <?= Html::encode($item->comment); ?>
+
 
         </p>
         <br>
@@ -86,9 +88,7 @@ $this->render('_form', [
 
 
 <?php
-// TODO: Переделать дерево комментов
 /** Comments $comment*/
-$i = $j = 0;
 /**
  * @param $model
  * @param $parrentCommentId
@@ -98,17 +98,20 @@ $i = $j = 0;
  */
 function tree($model, $parrentCommentId, $level) //рекурсивная функция
 {
+    $level += 1;
     foreach ($model->comments as $childcomment) {
-        if ($parrentCommentId == $childcomment->parrent_comment_id) {
-            $level += 1;
+
+        if ($parrentCommentId == $childcomment->parrent_comment_id)
+        {
+
             printComment($childcomment, $model, $level);
-            $parrentCommentId = $childcomment->id;
-            //if ($level < 20/*$childcomment->comments*/) {
-            tree($model, $parrentCommentId, $level);
-           // }
-            return $childcomment;
+            $parrentCommentIdChild = $childcomment->id;
+            tree($model, $parrentCommentIdChild, $level);
+//            $level = 1;
         }
+
     }
+    $level -=1;
 }
 
 foreach ($model->comments as $comment) { ?>
