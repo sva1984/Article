@@ -13,12 +13,23 @@ use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use frontend\services\ArticalsService;
 
 /**
  * ArticalsController implements the CRUD actions for Articals model.
  */
 class ArticalsController extends Controller
 {
+
+    protected $articalsService;
+
+    public function __construct($id, $module,
+                                ArticalsService $articalsService, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->articalsService = $articalsService;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -58,7 +69,7 @@ class ArticalsController extends Controller
     public function actionView($slug)
     {
 
-        $articleModel = $this->findModel($slug);
+        $articleModel = $this->articalsService->findModel($slug);
         $commentModel = new Comment();
         $userModel = new User();
         if ($commentModel->load(Yii::$app->request->post())) {
@@ -88,7 +99,7 @@ class ArticalsController extends Controller
     public function actionFilialComment($id, $slug)
     {
         $filialComment = new Comment();
-        $articleModel = $this->findModel($slug);
+        $articleModel = $this->articalsService->findModel($slug);
         if ($filialComment->load(Yii::$app->request->post())) {
             $filialComment->articals_id = $articleModel->id;
             $filialComment->parrent_comment_id = $id;
@@ -117,12 +128,13 @@ class ArticalsController extends Controller
      * @return Articals the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($slug)
-    {
-        if (($model = Articals::findOne(['slug' => $slug])) !== null) {
-            return $model;
-        }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
+//    protected function findModel($slug)
+//    {
+//        if (($model = Articals::findOne(['slug' => $slug])) !== null) {//перенес в сервис
+//            return $model;
+//        }
+//
+//        throw new NotFoundHttpException('The requested page does not exist.');
+//    }
 }
