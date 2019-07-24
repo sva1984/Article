@@ -2,20 +2,30 @@
 
 namespace common\repositories;
 
-interface StorageInterface
+use common\models\Articals;
+use yii\web\NotFoundHttpException;
+
+class ArticalsRepository
 {
-    /**
-     * @return array
-     */
-    public function load();
+    protected $articalsModel;
 
-    /**
-     * @param array
-     */
-    public function save(array $items);
-    /**
-     * @param int
-     */
-    public function delete($id);
+    public function __construct(Articals $articalsModel)
+    {
+        $this->articalsModel = $articalsModel;
+    }
 
-}​;
+    public function getBy($condition)
+    {
+        if (($model = $this->findBy($condition)) !== null) {//перенести в сервис
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function findBy($condition)
+    {
+        $model = Articals::findOne($condition);
+        return $model;
+    }
+}

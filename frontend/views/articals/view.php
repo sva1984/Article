@@ -18,8 +18,7 @@ YiiAsset::register($this);
 //die(print_r($model));
 
 function printComment($item, $model, $n)
-{
-//    print_r($item)?>
+{?>
 
     <li style="margin-left: <?php $margin = 40 * $n;
     echo "$margin";
@@ -107,7 +106,6 @@ function tree($model, $parrentCommentId, $level) //рекурсивная фун
             printComment($childcomment, $model, $level);
             $parrentCommentIdChild = $childcomment->id;
             tree($model, $parrentCommentIdChild, $level);
-//            $level = 1;
         }
 
     }

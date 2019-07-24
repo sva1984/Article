@@ -1,10 +1,11 @@
 <?php
 
-namespace frontend\services;
+namespace common\services;
 
-use common\models\Articals;
-use frontend\repositories\ArticalsRepository;
-use yii\web\NotFoundHttpException;
+
+use common\repositories\ArticalsRepository;
+
+
 
 class ArticalsService
 {
@@ -20,4 +21,10 @@ class ArticalsService
     {
         return $this->articalsRepository->getBy(['slug' => $slug]);
     }
+
+    public function articleModelId($slug)
+    {
+        return $this->articalsRepository->findBy(['slug' => $slug])->id;
+    }
+
 }

@@ -13,7 +13,9 @@ use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use frontend\services\ArticalsService;
+use common\services\ArticalsService;
+use common\services\CommentService;
+use common\services\UserService;
 
 /**
  * ArticalsController implements the CRUD actions for Articals model.
@@ -22,12 +24,17 @@ class ArticalsController extends Controller
 {
 
     protected $articalsService;
+    protected $commentService;
+    protected $userService;
 
     public function __construct($id, $module,
-                                ArticalsService $articalsService, $config = [])
+                                ArticalsService $articalsService, CommentService $commentService,
+                                UserService $userService, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->articalsService = $articalsService;
+        $this->commentService = $commentService;
+        $this->userService = $userService;
     }
 
     /**
@@ -65,23 +72,26 @@ class ArticalsController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
-     */
+    */
+
+
+
     public function actionView($slug)
     {
-
         $articleModel = $this->articalsService->findModel($slug);
-        $commentModel = new Comment();
-        $userModel = new User();
+        $commentModel = $this->commentService->newCommentModel();
+        $userModel = $this->userService->newUserModel();
         if ($commentModel->load(Yii::$app->request->post())) {
-            $commentModel->articals_id = $articleModel->id;
-            if (!$commentModel->save()) {
+            $commentModel->articals_id = $this->articalsService->articleModelId($slug);
+//            echo "<pre>";
+//            die(print_r($this->articalsService->articleModelId($slug)));
+            if (!$commentModel->save())
+            {
                 die(print_r($commentModel->errors));
             }
-//            Yii::$app->request->
-
             Yii::$app->session->setFlash('success', 'comment added');
         }
-        $commentModel = new Comment();
+        $commentModel = $this->commentService->newCommentModel();
         return $this->render('view', [
             'model' => $articleModel,
             'commentModel' => $commentModel,
@@ -98,7 +108,7 @@ class ArticalsController extends Controller
      */
     public function actionFilialComment($id, $slug)
     {
-        $filialComment = new Comment();
+        $filialComment = $this->commentService->newCommentModel();
         $articleModel = $this->articalsService->findModel($slug);
         if ($filialComment->load(Yii::$app->request->post())) {
             $filialComment->articals_id = $articleModel->id;
